@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class Tile extends StatelessWidget {
   final bool taskCompleated;
   final String title;
-  Function(bool?) onChanged;
+  final Function(bool?) onChanged;
 
-  Tile(
+  const Tile(
       {super.key,
       required this.taskCompleated,
       required this.title,
@@ -22,20 +22,21 @@ class Tile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-            color: Colors.grey[900], borderRadius: BorderRadius.circular(10)),
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Row(
           children: [
             Checkbox(
               value: taskCompleated,
               onChanged: onChanged,
-              checkColor: Colors.grey[900],
-              activeColor: Colors.white,
+              checkColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).colorScheme.secondary,
             ),
             Text(
               title,
-              // ignore: prefer_const_constructors
               style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontSize: 16,
                   decoration: taskCompleated
                       ? TextDecoration.lineThrough

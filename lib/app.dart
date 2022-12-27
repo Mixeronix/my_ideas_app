@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_ideas_app/alert_box.dart';
 import 'package:my_ideas_app/tile.dart';
 
 class App extends StatefulWidget {
@@ -13,12 +14,12 @@ class _AppState extends State<App> {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog();
+        return const AlertBox();
       },
     );
   }
 
-  List Todo = [
+  List toDo = [
     ["aaa", false],
     ["bbb", true],
     ["ccc", true],
@@ -26,7 +27,7 @@ class _AppState extends State<App> {
 
   void onChanged(int index) {
     setState(() {
-      Todo[index][1] = !Todo[index][1];
+      toDo[index][1] = !toDo[index][1];
     });
   }
 
@@ -34,23 +35,23 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: Todo.length,
+        itemCount: toDo.length,
         itemBuilder: (BuildContext context, int index) {
           return Tile(
-              taskCompleated: Todo[index][1],
-              title: Todo[index][0],
+              taskCompleated: toDo[index][1],
+              title: toDo[index][0],
               onChanged: (value) => onChanged(index));
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTodo,
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),
       ),
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
         elevation: 15,
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text("Your ideas"),
       ),
     );
