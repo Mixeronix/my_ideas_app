@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_ideas_app/alert_button.dart';
 
 class AlertBox extends StatelessWidget {
   const AlertBox({super.key});
@@ -6,18 +7,25 @@ class AlertBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.grey[850],
       content: SizedBox(
-        height: 200,
+        height: 175,
         width: 1600,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const TextField(
               cursorColor: Colors.white,
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: "Title"),
             ),
-            Row()
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AlertButton(title: "Add", onClicked: () {}),
+                AlertButton(title: "Cancel", onClicked: () {}),
+              ],
+            )
           ],
         ),
       ),
