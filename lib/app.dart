@@ -10,24 +10,40 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final _controller = TextEditingController();
+
   void createNewTodo() {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertBox();
+        return AlertBox(
+          controller: _controller,
+          onCancel: () => Navigator.of(context).pop(),
+          onSave: () {
+            if (_controller.text != "") {
+              setState(() {
+                toDo.add([_controller.text, false]);
+                _controller.clear();
+              });
+              Navigator.of(context).pop();
+            }
+          },
+        );
       },
     );
   }
 
-  List toDo = [
-    ["aaa", false],
-    ["bbb", true],
-    ["ccc", true],
-  ];
+  List toDo = [];
 
   void onChanged(int index) {
     setState(() {
       toDo[index][1] = !toDo[index][1];
+      toDo.sort((a, b) {
+        if (b[1]) {
+          return -1;
+        }
+        return 1;
+      });
     });
   }
 
